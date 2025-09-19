@@ -64,3 +64,37 @@ document.addEventListener("DOMContentLoaded", () => {
   goToSlide(0);
   startAutoplay();
 });
+
+let url = "http://localhost:3000/articles";
+let actualitesContainer = document.getElementById("actualites");
+
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+  
+    data.forEach(article => {
+      let articleDiv = document.createElement("div");
+      articleDiv.classList.add("element1");
+
+      let p1 = document.createElement("p");
+      p1.innerHTML = article.title;
+
+      let p2 = document.createElement("p");
+      p2.innerHTML = new Date(article.publicationDate).toLocaleDateString();
+
+      let p3 = document.createElement("p");
+      p3.innerHTML = article.description;
+
+      let p4 = document.createElement("p");
+      p4.innerHTML = article.content;
+      articleDiv.appendChild(p1);
+      articleDiv.appendChild(p2);
+      articleDiv.appendChild(p3);
+      articleDiv.appendChild(p4);
+       actualitesContainer.appendChild(articleDiv);
+    });
+
+
+    }
+  ).catch(error => console.error('Error:', error));
