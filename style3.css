@@ -1,3 +1,55 @@
+html, body {
+  height: 100%;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+footer.footer-haut, footer.footer-bas {
+  flex-shrink: 0;
+}
+.agenda {
+  width: 100%;
+  display: block;
+  margin: 0 auto 4rem auto;
+  box-sizing: border-box;
+}
+main {
+  flex: 1 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 40px;
+}
+/* Force le positionnement relatif de .news-card et absolu de .date-container dans tous les contextes */
+/* Positionne la date en bas à gauche de chaque carte actualité */
+.news-card {
+  position: relative;
+  position: relative;
+  min-height: 240px;
+  padding-bottom: 2.5rem;
+}
+.date-container {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+}
+.date {
+  font-size: 0.95rem;
+  color: #fff;
+  opacity: 0.85;
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -153,28 +205,26 @@ header{
     }
 
     .actions {
-  display: flex;
-  justify-content: flex-end; /* Aligne les boutons à droite */
-  gap: 10px; /* Espacement entre les boutons */
-  margin-top: 10px;
-}
-
-.actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  margin: 0;
+      z-index: 3;
+      margin: 0;
+    }
 
 .edit, .delete {
-  flex: 1; /* Chaque bouton prend la même largeur */
-  max-width: 150px; /* Limite la largeur */
-  font-size: 1rem;
+  flex: 1;
+  max-width: 260px; /* Largeur augmentée */
+  min-width: 140px;
+  font-size: 1.15rem;
+  padding: 7px 22px; /* Hauteur réduite, largeur augmentée */
 }
 
-.date {
-  position: relative;
-  top: 40px; /* Décale vers le bas */
-}
+
 
 
 .news-card {
@@ -224,7 +274,7 @@ header{
 
 
 
-/* FOOTER */
+
 html, body {
   margin: 0;
   padding: 0;
@@ -314,6 +364,7 @@ main {
   color: #fff;
   padding: 20px;
   width: 100%;
+  position: static;
 }
 
 .footer-bottom {
