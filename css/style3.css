@@ -505,8 +505,21 @@ main {
   }
 }
 
+/* Titres des actualités sur la page actualite : fond vert et texte blanc, priorité maximale */
+.actualite .article-title,
+#actualite .article-title {
+  background: #36a745 !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  font-size: 1.4em !important;
+  padding: 0.3em 0.6em !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
 
-
-
+/* Titres des articles : texte blanc */
+.article-title {
+  color: #fff !important;
+}
 
 /*Fin de section FOOTER*/

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Détail de l'actualité</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/style3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+	<header>
+		<h1>Agenceco</h1>
+		<div class="burger" id="burger">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<nav id="menu">
+			<ul class="menu">
+				<li><a href="accueil.html">Accueil</a></li>
+				<li><a href="#">Notre équipe</a></li>
+				<li><a href="Nos-services.html">Nos services</a></li>
+				<li><a href="#">Témoignages</a></li>
+				<li><a href="contact.html">Contactez-Nous</a></li>
+				<li><a href="actualite.html">Actualités</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main class="detail-actualite-container">
+		<h2 style="position:absolute;left:-9999px;">Détail actualité</h2>
+		<div id="detail-actualite" class="news-card">
+			<!-- Les infos détaillées seront injectées ici -->
+		</div>
+		<a href="actualite.html" class="btn" style="margin:2em auto;display:block;width:max-content;">Retour aux actualités</a>
+	</main>
+	<footer class="footer-haut">
+		<div class="footer-columns">
+			<div class="column">
+				<h4>Content</h4>
+				<ul>
+					<li>consectetur</li>
+					<li>adipiscing</li>
+				</ul>
+			</div>
+			<div class="column">
+				<h4>Informations</h4>
+				<ul>
+					<li>consectetur</li>
+					<li>adipiscing</li>
+				</ul>
+			</div>
+			<div class="column">
+				<h4>Services</h4>
+				<ul>
+					<li>consectetur</li>
+					<li>adipiscing</li>
+				</ul>
+			</div>
+			<div class="column">
+				<h4>Aide</h4>
+				<ul>
+					<li>consectetur</li>
+					<li>adipiscing</li>
+				</ul>
+			</div>
+			<div class="contact">
+				<p><i class="fa-solid fa-phone"></i> +33 00 00 00 00 00</p>
+				<p><i class="fa-solid fa-phone" style="visibility: hidden;"></i> +33 00 00 00 00 00</p>
+				<p><i class="fas fa-location-dot"></i> 75001 Paris</p>
+				<p><i class="fas fa-map-marker-alt" style="visibility: hidden;"></i> France</p>
+			</div>
+		</div>
+	</footer>
+	<footer class="footer-bas">
+		<div class="footer-bottom">
+			<p>Copyright © 2021 AGENCECO - All rights reserved.</p>
+			<button class="login-btn" onclick="window.location.href='connexion.html'">Me connecter</button>
+			<div class="social-icons">
+				<i class="fab fa-facebook-f"></i>
+				<i class="fab fa-twitter"></i>
+				<i class="fab fa-instagram"></i>
+			</div>
+		</div>
+	</footer>
+	<script src="../js/menu.js"></script>
+	<script>
+		// Récupère l'id de l'actualité depuis l'URL
+		function getIdFromUrl() {
+			const params = new URLSearchParams(window.location.search);
+			return params.get('id');
+		}
+		async function fetchDetailActualite(id) {
+			try {
+				const res = await fetch(`http://localhost:3000/articles/${id}`);
+				if (!res.ok) throw new Error('Erreur lors de la récupération');
+				return await res.json();
+			} catch (e) {
+				return null;
+			}
+		}
+		async function afficherDetail() {
+			const id = getIdFromUrl();
+			const container = document.getElementById('detail-actualite');
+			if (!id) {
+				container.innerHTML = '<p style="color:red">Aucune actualité sélectionnée.</p>';
+				return;
+			}
+			const actu = await fetchDetailActualite(id);
+			if (!actu) {
+				container.innerHTML = '<p style="color:red">Erreur lors du chargement de l\'actualité.</p>';
+				return;
+			}
+			container.innerHTML = `
+				<h2 class="article-title">${actu.title || ''}</h2>
+				<p><strong>Description :</strong> ${actu.description || ''}</p>
+				<p><strong>Contenu :</strong><br>${actu.content || ''}</p>
+				<div class="date-container"><a class="date"><strong>Publié le</strong> ${actu.publicationDate || ''}</a></div>
+			`;
+		}
+		window.addEventListener('DOMContentLoaded', afficherDetail);
+	</script>
+</body>
+</html>

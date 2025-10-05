@@ -1,3 +1,57 @@
+@media (max-width: 480px) {
+  #team .team-intro {
+    font-size: 11px;
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 18px;
+    max-width: 75vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    white-space: normal;
+    word-break: break-word;
+  }
+  #team .team-intro br {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  #team .team-intro {
+    font-size: 18px;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    white-space: pre-line;
+    word-break: break-word;
+    max-width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
+@media (max-width: 480px) {
+  #team .team-intro {
+    font-size: 18px;
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 18px;
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+#team .team-intro {
+  white-space: pre-line;
+}
+.contact-intro {
+  color: white;
+}
+#team .team-intro {
+  font-size: 30px;
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
 @media (max-width: 768px) {
   nav#menu {
     display: none;
@@ -9,9 +63,14 @@
     width: 100vw;
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
   nav#menu.active {
     display: flex;
+    opacity: 1;
+    transform: translateY(0);
   }
   .menu {
     flex-direction: column;
@@ -26,6 +85,13 @@
   }
   .burger {
     display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
   }
 }
 /* Forcer la couleur du titre d'accueil en blanc sur tous les écrans */
@@ -188,8 +254,12 @@ font-size: 30px;}
 #team div{color: #565e65;}
 
 .card-team img{
-    width: 250px;
-    height: 250px;
+    width: 180px !important;
+    height: 180px !important;
+    object-fit: cover !important;
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 50% !important;
     object-fit: cover;
     border-radius: 50%;
     object-position: center;
@@ -376,7 +446,9 @@ text-align: center;
 justify-content: center;
 font-size: 25px;}
 
-#actualite , p {color: white;}
+#actualite .element1 p,
+#actualite .element2 p,
+#actualite .element3 p {color: white;}
 
 
 
@@ -823,6 +895,14 @@ main {
   transform: scale(1.1);
 }
 
+/* Footer titres blancs */
+.footer-bottom h4,
+.footer-bas h4,
+.footer-columns h4 {
+  color: #fff !important;
+  font-weight: bold;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .footer-columns {
@@ -840,6 +920,61 @@ main {
     flex-direction: column;
     gap: 15px;
     text-align: center;
+  }
+}
+
+/* Footer en 2 colonnes sur mobile */
+@media (max-width: 480px) {
+  .footer-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+  .footer-columns .column {
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 0 5px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .footer-columns .column:nth-child(2),
+  .footer-columns .column:nth-child(4) {
+    grid-column: auto;
+  }
+  .footer-columns .column h4,
+  .footer-columns .column ul,
+  .footer-columns .column li {
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    align-self: flex-start;
+  }
+}
+@media (max-width: 480px) {
+  .footer-columns .column:nth-child(2),
+  .footer-columns .column:nth-child(4) {
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    font-size: 0.95rem;
+    color: inherit;
+    box-shadow: none;
+  }
+  .footer-columns .column:nth-child(2) h4,
+  .footer-columns .column:nth-child(4) h4 {
+    font-weight: normal;
+    color: inherit;
+  }
+  .footer-columns .column:nth-child(2) li,
+  .footer-columns .column:nth-child(4) li {
+    margin-bottom: 0;
   }
 }
 
@@ -972,11 +1107,14 @@ img {
     color: #fff !important;
     margin: 0;
     font-weight: 600;
+    line-height: 1.1;
+    word-break: break-word;
   }
   .jaune.titre {
     color: #d5f31f !important;
     font-size: 60px !important;
     font-weight: 700;
+    word-break: break-word;
   }
 
   .col-33 {
@@ -1151,4 +1289,217 @@ img {
     justify-content: space-between;
     align-items: center;
   }
+}
+
+/* Agrandit les images sur mobile tout en conservant leur forme rectangulaire avec coins arrondis que sur desktop. */
+@media (max-width: 480px) {
+  .card-team img {
+    width: 70vw !important;
+    max-width: 220px;
+    height: auto !important;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 16px !important;
+    height: 100px;
+    width: 100px;
+  }
+  .slider {
+    height: 200px;
+  }
+}
+@media (max-width: 768px) {
+  .container, .row {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .footer-columns .contact p {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    overflow-x: auto;
+    text-align: center;
+    width: 100%;
+    gap: 8px;
+    vertical-align: middle;
+  }
+  .footer-columns .contact i {
+    margin: 0;
+    min-width: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: 0;
+  }
+  .login-btn {
+    width: 60%;
+    min-width: 120px;
+    max-width: 220px;
+    margin: 0 auto;
+    display: block;
+    font-size: 1rem;
+  }
+}
+@media (max-width: 480px) {
+  #actualite .element1,
+  #actualite .element2,
+  #actualite .element3 {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  #actualite .element1 p,
+  #actualite .element2 p,
+  #actualite .element3 p {
+    font-size: 0.95rem;
+    word-break: break-word;
+  }
+}
+@media (max-width: 480px) {
+  .titlebackground {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    min-height: 220px;
+    padding: 0 10px;
+  }
+  .titlebackground .box.deux {
+    position: absolute;
+    left: 10px;
+    bottom: 20px;
+    width: 90%;
+    z-index: 2;
+    text-align: left;
+  }
+  .titlebackground h2 {
+    font-size: 60px !important;
+    color: #fff !important;
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.1;
+    word-break: break-word;
+    text-align: left !important;
+  }
+  .jaune.titre {
+    color: #d5f31f !important;
+    font-size: 60px !important;
+    font-weight: 700;
+    word-break: break-word;
+  }
+}
+@media (max-width: 480px) {
+  .titlebackground h2,
+  .jaune.titre {
+    font-size: 28px !important;
+    line-height: 1.15;
+    word-break: normal;
+    white-space: normal;
+    max-width: 95vw;
+    width: 95vw;
+    text-align: left;
+    letter-spacing: -1px;
+  }
+  .titlebackground .box.deux {
+    width: 95vw;
+    text-align: left;
+    margin-left: 0;
+  }
+}
+@media (max-width: 480px) {
+  .titlebackground {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 220px;
+    position: relative;
+  }
+  .titlebackground .box.deux {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95vw;
+    text-align: center;
+    margin: 0;
+  }
+  .titlebackground h2,
+  .jaune.titre {
+    text-align: center;
+  }
+}
+@media (max-width: 480px) {
+  .titlebackground h2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.2em;
+  }
+  .jaune.titre {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 480px) {
+  .card-team img {
+    width: 100px !important;
+    height: 100px !important;
+    object-fit: cover !important;
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 50% !important;
+  }
+}
+@media (max-width: 480px) {
+  .card-team img {
+    width: 140px !important;
+    height: 140px !important;
+    object-fit: cover !important;
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 50% !important;
+  }
+}
+@media (max-width: 480px) {
+  .card-team img {
+    width: 180px !important;
+    height: 180px !important;
+    object-fit: cover !important;
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 50% !important;
+  }
+}
+
+/* Titres des articles : fond transparent et texte vert */
+.article-title {
+  background: transparent !important;
+  color: #255919 !important;
+  font-weight: bold;
+  font-size: 1.4em;
+  padding: 0.2em 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Titres des actualités sur la page actualite : fond vert et texte blanc */
+.actualite .article-title {
+  background: #36a745 !important;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 1.4em;
+  padding: 0.3em 0.6em;
+  border-radius: 8px;
+  box-shadow: none;
 }

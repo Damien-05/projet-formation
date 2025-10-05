@@ -1,13 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // --- Menu burger ---
-  const burger = document.getElementById('burger');
-  const menu = document.getElementById('menu');
-  if (burger && menu) {
-    burger.addEventListener('click', function() {
-      menu.classList.toggle('active');
-    });
-  }
-
   // --- Slider ---
   const slidesEl = document.querySelector(".slides");
   const dots = document.querySelectorAll(".dot");
@@ -80,28 +71,37 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        data.forEach(article => {
-          let articleDiv = document.createElement("div");
-          articleDiv.classList.add("element1");
+        actualitesContainer.innerHTML = "";
+        if (data.length > 0) {
+          // Affiche toutes les actualités
+          data.forEach(article => {
+            let articleDiv = document.createElement("div");
+            articleDiv.classList.add("element1");
 
-          let p1 = document.createElement("p");
-          p1.innerHTML = article.title;
+            let p1 = document.createElement("p");
+            p1.innerHTML = article.title;
 
-          let p2 = document.createElement("p");
-          p2.innerHTML = new Date(article.publicationDate).toLocaleDateString();
+            let p2 = document.createElement("p");
+            p2.innerHTML = new Date(article.publicationDate).toLocaleDateString();
 
-          let p3 = document.createElement("p");
-          p3.innerHTML = article.description;
+            let p3 = document.createElement("p");
+            p3.innerHTML = article.description;
 
-          let p4 = document.createElement("p");
-          p4.innerHTML = article.content;
-          articleDiv.appendChild(p1);
-          articleDiv.appendChild(p2);
-          articleDiv.appendChild(p3);
-          articleDiv.appendChild(p4);
-          actualitesContainer.appendChild(articleDiv);
-        });
+            let p4 = document.createElement("p");
+            p4.innerHTML = article.content;
+            articleDiv.appendChild(p1);
+            articleDiv.appendChild(p2);
+            articleDiv.appendChild(p3);
+            articleDiv.appendChild(p4);
+            actualitesContainer.appendChild(articleDiv);
+          });
+        } else {
+          actualitesContainer.innerHTML = '<p>Aucune actualité disponible.</p>';
+        }
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => {
+        actualitesContainer.innerHTML = '<p style="color:red">Erreur lors du chargement des actualités.</p>';
+        console.error('Error:', error);
+      });
   }
 });

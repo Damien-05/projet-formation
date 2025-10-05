@@ -1,9 +1,5 @@
-const burger = document.getElementById('burger');
-const menu = document.getElementById('menu');
-
-burger.addEventListener('click', () => {
-  menu.classList.toggle('active');
-});
+// slider.js
+// Gère le slider/carrousel d'images
 
 document.addEventListener("DOMContentLoaded", () => {
   const slidesEl = document.querySelector(".slides");
@@ -15,11 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let intervalId;
 
   function goToSlide(index) {
+    if (!slidesEl) return;
     if (index < 0) index = totalSlides - 1;
     if (index >= totalSlides) index = 0;
     slidesEl.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach(dot => dot.classList.remove("active"));
-    dots[index].classList.add("active");
+    if (dots.length > 0 && dots[index]) {
+      dots.forEach(dot => dot.classList.remove("active"));
+      dots[index].classList.add("active");
+    }
     currentIndex = index;
   }
 
@@ -39,18 +38,20 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(intervalId);
   }
 
-  // Événements
-  nextBtn.addEventListener("click", () => {
-    nextSlide();
-    stopAutoplay();
-    startAutoplay();
-  });
-
-  prevBtn.addEventListener("click", () => {
-    prevSlide();
-    stopAutoplay();
-    startAutoplay();
-  });
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      nextSlide();
+      stopAutoplay();
+      startAutoplay();
+    });
+  }
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      prevSlide();
+      stopAutoplay();
+      startAutoplay();
+    });
+  }
 
   dots.forEach(dot => {
     dot.addEventListener("click", () => {
@@ -60,16 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Initialisation
-  goToSlide(0);
-  startAutoplay();
+  if (slidesEl) {
+    goToSlide(0);
+    startAutoplay();
+  }
 });
-
-fetch(' http://localhost:3000')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data); // Affiche les articles
-  })
-  .catch(error => {
-    console.error('Erreur lors de la récupération des articles :', error);
-  });
