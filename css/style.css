@@ -1,5 +1,21 @@
 @media (max-width: 480px) {
   #team .team-intro {
+    font-size: 12px;
+    max-width: 80vw;
+    width: 80vw;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.5;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+    overflow-wrap: break-word;
+    padding: 0;
+  }
+}
+@media (max-width: 480px) {
+  #team .team-intro {
     font-size: 11px;
     text-align: center;
     line-height: 1.4;
@@ -1502,4 +1518,39 @@ img {
   padding: 0.3em 0.6em;
   border-radius: 8px;
   box-shadow: none;
+}
+/* Forçage mobile .team-intro (doit être la dernière règle du fichier) */
+@media (max-width: 480px) {
+  #team .team-intro {
+    font-size: 12px !important;
+    width: 95vw !important;
+    max-width: 95vw !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    margin: 0 auto 10px auto !important;
+    word-break: break-word !important;
+    letter-spacing: 0 !important;
+    font-weight: 400 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+}
+/* Forçage mobile galerie (5 lignes pour les deux paragraphes) */
+@media (max-width: 480px) {
+  #galerie .galerie-box p {
+    font-size: 13px !important;
+    width: 98vw !important;
+    max-width: 98vw !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
+    margin: 0 auto 6px auto !important;
+    word-break: break-word !important;
+    letter-spacing: 0 !important;
+    font-weight: 400 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    white-space: normal !important;
+  }
 }
