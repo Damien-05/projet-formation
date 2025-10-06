@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AGENCECO - Connexion</title>
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/style-ajout-actualite.css">
+  <link rel="stylesheet" href="../css/style4.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+ <header>
+        <h1>Agenceco</h1>
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="menu">
+            <ul class="menu">
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="#">Notre équipe</a></li>
+                <li><a href="Nos-services.html">Nos services</a></li>
+                <li><a href="#">Témoignages</a></li>
+                <li><a href="contact.html">Contactez-Nous</a></li>
+                <li><a href="actualite.html">Actualités</a></li>
+            </ul>
+        </nav>
+    </header>
+
+  <main>
+    <h1 class="ajout-titre">Ajouter une actualité</h1>
+    <div class="ajout-actualite-form">
+      <form>
+        <input type="text" id="titre" name="titre" placeholder="Le titre de mon actualité" required>
+        <input type="text" id="description" name="description" placeholder="Sa description" required>
+        <textarea id="contenu" name="contenu" rows="6" placeholder="Son contenu" required></textarea>
+        <button type="submit" class="ajout-btn">Sauvegarder</button>
+      </form>
+    </div>
+  </main>
+
+
+  <footer class="footer-haut">
+  <div class="footer-columns">
+    <div class="column">
+      <h4>Content</h4>
+      <ul>
+        <li>consectetur</li>
+        <li>adipiscing</li>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Informations</h4>
+      <ul>
+        <li>consectetur</li>
+        <li>adipiscing</li>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Services</h4>
+      <ul>
+        <li>consectetur</li>
+        <li>adipiscing</li>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Aide</h4>
+      <ul>
+        <li>consectetur</li>
+        <li>adipiscing</li>
+      </ul>
+    </div>
+    <div class="contact">
+      <p><i class="fa-solid fa-phone"></i> +33 00 00 00 00 00</p>
+      <p><i class="fa-solid fa-phone" style="visibility: hidden;"></i> +33 00 00 00 00 00</p>
+      <p><i class="fas fa-location-dot"></i> 75001 Paris</p>
+      <p><i class="fas fa-map-marker-alt" style="visibility: hidden;"></i> France</p>
+    </div>
+  </div>
+</footer>
+  
+<footer class="footer-bas">
+<div class="footer-bottom">
+    <p>Copyright © 2021 AGENCECO - All rights reserved.</p>
+    <button class="login-btn" onclick="window.location.href='connexion.html'">Me connecter</button>
+    <div class="social-icons">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-instagram"></i>
+    </div>
+</div>
+</footer>
+</script>
+<script src="../js/script-ajout-actualite.js"></script>
+<script src="../js/menu.js"></script>
+</body>
+</html>

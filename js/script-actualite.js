@@ -1,3 +1,12 @@
+// Redirection bouton 'Ajouter une actualité'
+document.addEventListener('DOMContentLoaded', function() {
+    const addBtn = document.querySelector('.Add-button');
+    if (addBtn) {
+        addBtn.addEventListener('click', function() {
+            window.location.href = 'ajout-actualite.html';
+        });
+    }
+});
 // script pour la page actualite.html
 // Ce fichier gère l'affichage dynamique des actualités, la navigation vers le détail, et les actions conditionnelles selon l'authentification.
 
@@ -79,53 +88,10 @@ function afficherActualites(actualites) {
             ) return;
             allerAuDetail(actu.id);
         });
-        // Action Modifier
+        // Action Modifier : redirige vers la page de modification
         card.querySelector('.edit').addEventListener('click', function(e) {
             e.stopPropagation();
-            if (card.querySelector('.edit-form')) return; // déjà ouvert
-            const form = document.createElement('form');
-            form.className = 'edit-form';
-            form.innerHTML = `
-                <input type="text" name="titre" value="${actu.title.replace(/"/g, '&quot;')}">
-                <input type="text" name="description" value="${actu.description ? actu.description.replace(/"/g, '&quot;') : ''}">
-                <textarea name="content">${actu.content || ''}</textarea>
-                <button type="submit">Enregistrer</button>
-                <button type="button" class="cancel-edit">Annuler</button>
-            `;
-            form.addEventListener('submit', async function(ev) {
-                ev.preventDefault();
-                const titre = form.titre.value.trim();
-                const description = form.description.value.trim();
-                const content = form.content.value.trim();
-                const token = localStorage.getItem('token');
-                if (!token) return alert('Non autorisé');
-                try {
-                    const response = await fetch(`http://localhost:3000/articles/${actu.id}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + token
-                        },
-                        body: JSON.stringify({ title: titre, description, content })
-                    });
-                    if (response.ok) {
-                        // Met à jour l'affichage sans reload
-                        card.querySelector('.article-title').textContent = titre;
-                        card.querySelector('.desc').textContent = description;
-                        card.querySelector('.content').textContent = content;
-                        form.remove();
-                        alert('Actualité modifiée !');
-                    } else {
-                        alert('Erreur lors de la modification');
-                    }
-                } catch (err) {
-                    alert('Erreur réseau');
-                }
-            });
-            form.querySelector('.cancel-edit').addEventListener('click', function() {
-                form.remove();
-            });
-            card.appendChild(form);
+            window.location.href = `modifier-actualite.html?id=${actu.id}`;
         });
         // Action Supprimer
         card.querySelector('.delete').addEventListener('click', async function(e) {

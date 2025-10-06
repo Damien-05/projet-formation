@@ -1,0 +1,63 @@
+/* Placeholders blancs pour les champs du formulaire */
+.ajout-actualite-form input::placeholder,
+.ajout-actualite-form textarea::placeholder {
+  color: #fff;
+  opacity: 1;
+}
+.ajout-actualite-form {
+  max-width: 1400px;
+  margin: 40px auto;
+  background: #18424a;
+  border-radius: 12px;
+  box-shadow: none;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.ajout-actualite-form input,
+.ajout-actualite-form textarea {
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 20px 24px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  font-size: 1.25em;
+  font-family: inherit;
+  background: transparent;
+  color: #fff;
+  transition: border 0.2s;
+  box-sizing: border-box;
+}
+.ajout-actualite-form input:focus,
+.ajout-actualite-form textarea:focus {
+  border: 2px solid #bfff00;
+  outline: none;
+  background: #18424a;
+}
+.ajout-btn {
+  background: #bfff00;
+  color: #222;
+  border: none;
+  border-radius: 30px;
+  padding: 18px 48px;
+  font-size: 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 32px auto 0 auto;
+  display: block;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: none;
+}
+.ajout-btn:hover {
+  background: #a3e635;
+  color: #18424a;
+}
+.ajout-titre {
+  text-align: center;
+  margin-top: 32px;
+  color: #5bb46a;
+  font-size: 3em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
