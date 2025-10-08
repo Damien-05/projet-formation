@@ -38,27 +38,25 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(intervalId);
   }
 
+  function addTap(el, handler){
+    if (!el) return;
+    if (window.PointerEvent) {
+      el.addEventListener('pointerdown', function(e){ e.preventDefault(); handler(e); });
+    } else {
+      el.addEventListener('touchstart', function(e){ e.preventDefault(); handler(e); });
+      el.addEventListener('click', handler);
+    }
+  }
+
   if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      nextSlide();
-      stopAutoplay();
-      startAutoplay();
-    });
+    addTap(nextBtn, () => { nextSlide(); stopAutoplay(); startAutoplay(); });
   }
   if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      prevSlide();
-      stopAutoplay();
-      startAutoplay();
-    });
+    addTap(prevBtn, () => { prevSlide(); stopAutoplay(); startAutoplay(); });
   }
 
   dots.forEach(dot => {
-    dot.addEventListener("click", () => {
-      goToSlide(parseInt(dot.dataset.index, 10));
-      stopAutoplay();
-      startAutoplay();
-    });
+    addTap(dot, () => { goToSlide(parseInt(dot.dataset.index, 10)); stopAutoplay(); startAutoplay(); });
   });
 
   if (slidesEl) {
