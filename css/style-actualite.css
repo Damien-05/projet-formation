@@ -1,0 +1,107 @@
+/* Styles spécifiques à la page actualité - Mobile only overrides
+   Scopés sur .Nos-actualités afin de ne pas impacter le desktop
+*/
+
+@media (max-width: 768px) {
+  /* Page container */
+  .Nos-actualités {
+    padding: 12px 8px 24px;
+    box-sizing: border-box;
+  }
+
+  .Nos-actualités h1 {
+    font-size: 1.6rem;
+    margin: 0 0 12px;
+    padding: 0 4px;
+  }
+
+  /* Bouton d'ajout plus compact */
+  .Add-button {
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    width: auto;
+  }
+
+  /* Agenda / liste des cartes */
+  .agenda {
+    padding: 0 4px;
+    margin-bottom: 2rem;
+  }
+
+  /* Cartes d'actualité : pleine largeur, moins hautes */
+  .news-card {
+    min-height: auto !important;
+    padding: 12px !important;
+    margin: 10px 0 !important;
+    border-radius: 8px !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .news-card h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .news-card p {
+    font-size: 1rem !important;
+    margin: 6px 0 !important;
+    text-align: left !important;
+  }
+
+  /* Forcer le conteneur de date à ne plus être absolu (évite chevauchement) */
+  .date-container {
+    position: static !important;
+    display: flex !important;
+    gap: 8px;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .date {
+    font-size: 0.85rem !important;
+    color: #fff !important;
+    background: rgba(0,0,0,0.12);
+    padding: 4px 8px;
+    border-radius: 6px;
+    opacity: 1 !important;
+  }
+
+  /* Actions (modifier / supprimer) en flux normal, non absolues */
+  .actions {
+    position: static !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    margin-top: 8px !important;
+  }
+
+  .edit, .delete {
+    min-width: auto !important;
+    padding: 6px 10px !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* Formulaires ajout/édition insérés dynamiquement */
+  .add-form, .news-card .edit-form {
+    max-width: 100% !important;
+    padding: 12px !important;
+    margin: 12px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .add-form input, .add-form textarea, .news-card .edit-form input, .news-card .edit-form textarea {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Lisibilité du contenu : forcer le wrapping */
+  .news-card .content, .news-card .desc {
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+
+  /* Footer spacing pour mobile */
+  footer.footer-haut { padding: 20px 8px !important; }
+}
