@@ -79,18 +79,13 @@ if (loginForm) {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     try {
-      const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      const data = await response.json();
-      if (response.ok) {
-        alert(`Bienvenue !`);
-        localStorage.setItem('token', data.token);
+      const res = await window.API.login({ username: email, password });
+      if (res.ok) {
+        alert('Bienvenue !');
+        localStorage.setItem('token', res.token);
         window.location.href = 'actualite.html';
       } else {
-        alert(data.message);
+        alert('Identifiants invalides');
       }
     } catch (error) {
       console.error('Erreur de connexion :', error);

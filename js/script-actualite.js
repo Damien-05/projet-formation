@@ -12,10 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 1. Récupération des actualités depuis l'API
 async function fetchActualites() {
-    // Utilise la bonne route backend
-    const response = await fetch('http://localhost:3000/articles');
-    if (!response.ok) throw new Error('Erreur lors de la récupération des actualités');
-    return await response.json();
+    // Utilise le wrapper API (avec fallback localStorage)
+    return await window.API.getArticles();
 }
 
 // 2. Affichage dynamique des actualités dans le DOM
@@ -100,18 +98,13 @@ function afficherActualites(actualites) {
             if (!token) return alert('Non autorisé');
             if (confirm('Supprimer cet article ?')) {
                 try {
-                    const response = await fetch(`http://localhost:3000/articles/${actu.id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Authorization': 'Bearer ' + token
+                        const ok = await window.API.deleteArticle(actu.id);
+                        if (ok) {
+                            card.remove();
+                            alert('Article supprimé');
+                        } else {
+                            alert('Erreur lors de la suppression');
                         }
-                    });
-                    if (response.ok) {
-                        card.remove();
-                        alert('Article supprimé');
-                    } else {
-                        alert('Erreur lors de la suppression');
-                    }
                 } catch (err) {
                     alert('Erreur réseau');
                 }
@@ -160,13 +153,8 @@ async function supprimerArticle(id) {
     const token = localStorage.getItem('token');
     if (!token) return alert('Non autorisé');
     try {
-        const response = await fetch(`http://localhost:3000/articles/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        });
-        if (response.ok) {
+        const ok = await window.API.deleteArticle(id);
+        if (ok) {
             alert('Article supprimé');
             location.reload();
         } else {
@@ -180,7 +168,7 @@ async function supprimerArticle(id) {
 // 6. Initialisation au chargement de la page
 window.addEventListener('DOMContentLoaded', async () => {
     try {
-        const actualites = await fetchActualites();
+    const actualites = await fetchActualites();
         afficherActualites(actualites);
         afficherActionsSiConnecte();
 
@@ -249,24 +237,8 @@ window.addEventListener('DOMContentLoaded', async () => {
                     const token = localStorage.getItem('token');
                     if (!token) return alert('Non autorisé');
                     try {
-                        const response = await fetch('http://localhost:3000/articles', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': 'Bearer ' + token
-                            },
-                            body: JSON.stringify({ title: titre, description, content })
-                        });
-                        if (response.ok) {
-                            const newActu = await response.json();
-                            // Ajoute dynamiquement la nouvelle actu en haut
-                            const actuObj = {
-                                id: newActu.id,
-                                title: titre,
-                                description: description,
-                                content: content,
-                                publicationDate: newActu.publicationDate || (new Date()).toLocaleDateString()
-                            };
+                        const created = await window.API.createArticle({ title: titre, description, content });
+                        if (created) {
                             // Recharge la liste (ou ajoute dynamiquement)
                             const allActus = await fetchActualites();
                             agenda.innerHTML = '';
@@ -316,15 +288,8 @@ async function ajouterArticle(data) {
     const token = localStorage.getItem('token');
     if (!token) return alert('Non autorisé');
     try {
-        const response = await fetch('http://localhost:3000/articles', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify(data)
-        });
-        if (response.ok) {
+        const created = await window.API.createArticle(data);
+        if (created) {
             alert('Article ajouté');
             location.reload();
         } else {

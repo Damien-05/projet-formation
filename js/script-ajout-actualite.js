@@ -1,6 +1,6 @@
 // Script pour gérer l'ajout d'une actualité via l'API
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   const form = document.querySelector('.ajout-actualite-form form');
   if (!form) return;
 
@@ -16,20 +16,18 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location.href = 'connexion.html';
       return;
     }
-    fetch('http://localhost:3000/articles/' + articleId, {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
+    try{
+      const data = await window.API.getArticle(articleId);
+      if (data) {
         document.getElementById('titre').value = data.title || '';
         document.getElementById('description').value = data.description || '';
         document.getElementById('contenu').value = data.content || '';
         document.querySelector('.ajout-titre').textContent = 'Modifier une actualité';
         form.querySelector('.ajout-btn').textContent = 'Mettre à jour';
-      })
-      .catch(() => alert('Erreur lors du chargement de l\'actualité.'));
+      }
+    }catch(e){
+      alert('Erreur lors du chargement de l\'actualité.');
+    }
   }
 
   form.addEventListener('submit', async function(e) {
@@ -43,24 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     try {
-      let url = 'http://localhost:3000/articles';
-      let method = 'POST';
-      if (articleId) {
-        url += '/' + articleId;
-        method = 'PUT';
-      }
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify({ title: titre, description, content: contenu })
-      });
-      if (response.ok) {
+      try{
+        if (articleId) {
+          await window.API.updateArticle(articleId, { title: titre, description, content: contenu });
+        } else {
+          await window.API.createArticle({ title: titre, description, content: contenu });
+        }
         alert(articleId ? 'Actualité modifiée !' : 'Actualité ajoutée !');
         window.location.href = 'actualite.html';
-      } else {
+      }catch(e){
         alert(articleId ? "Erreur lors de l'édition de l'actualité." : "Erreur lors de l'ajout de l'actualité.");
       }
     } catch (err) {

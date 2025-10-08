@@ -83,6 +83,7 @@
 			</div>
 		</div>
 	</footer>
+	<script src="../js/api.js"></script>
 	<script src="../js/menu.js"></script>
 	<script>
 		// Récupère l'id de l'actualité depuis l'URL
@@ -92,9 +93,7 @@
 		}
 		async function fetchDetailActualite(id) {
 			try {
-				const res = await fetch(`http://localhost:3000/articles/${id}`);
-				if (!res.ok) throw new Error('Erreur lors de la récupération');
-				return await res.json();
+				return await window.API.getArticle(id);
 			} catch (e) {
 				return null;
 			}
