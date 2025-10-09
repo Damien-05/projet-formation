@@ -1,6 +1,8 @@
 // Wrapper API avec fallback sur localStorage pour fonctionnement hors-serveur
 const API = (function(){
-  const base = 'http://localhost:3000'; // utilisé si serveur disponible
+  // Utiliser des requêtes relatives (même origine) pour la production
+  // et fallback vers localStorage si l'API distante n'est pas disponible.
+  const base = '';
   const storageKey = 'agenceco_articles_v1';
   const idKey = 'agenceco_articles_nextid_v1';
 
@@ -16,6 +18,27 @@ const API = (function(){
     localStorage.setItem(idKey, String(n+1));
     return n;
   }
+
+  // Initialiser quelques articles en local si aucune donnée n'existe
+  function _ensureSeed(){
+    try{
+      const raw = localStorage.getItem(storageKey);
+      if (!raw || JSON.parse(raw).length === 0){
+        const seed = [
+          { id: 1, title: "Les bases de Node.js", description: "Introduction aux concepts fondamentaux de Node.js", content: "Node.js est un environnement d'exécution JavaScript orienté serveur.", publicationDate: "2023-01-01" },
+          { id: 2, title: "REST API avec Express", description: "Créer une API REST", content: "Express facilite la création d'API robustes.", publicationDate: "2023-02-15" },
+          { id: 3, title: "L’éco-conception web expliquée", description: "Pourquoi l'éco-conception", content: "Réduire l'empreinte numérique des sites web.", publicationDate: "2023-03-20" }
+        ];
+        localStorage.setItem(storageKey, JSON.stringify(seed));
+        localStorage.setItem(idKey, String(seed.length + 1));
+      }
+    }catch(e){
+      // ignore si localStorage indisponible
+      console.warn('localStorage inaccessible', e);
+    }
+  }
+
+  _ensureSeed();
 
   async function tryFetch(path, opts){
     try{

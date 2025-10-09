@@ -2,7 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Empêche iOS de transformer automatiquement les numéros de téléphone en liens bleus -->
+  <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      (function(){
+        try{ if (window.innerWidth && window.innerWidth <= 768) document.documentElement.classList.add('is-mobile'); }catch(e){}
+      })();
+    </script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style3.css">
   <link rel="stylesheet" href="../css/style-actualite.css">

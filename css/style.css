@@ -1509,6 +1509,55 @@ img {
   box-shadow: none;
 }
 
+/* ----- Cross-browser mobile fixes ----- */
+/* Improve consistency between iOS and Android rendering */
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%; /* prevent font autosizing on mobile browsers */
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*, *::before, *::after { box-sizing: inherit; }
+
+/* Responsive headline sizing using clamp to behave similarly across devices */
+.titlebackground h2 {
+  font-size: clamp(24px, 6vw, 60px) !important;
+  line-height: 1.05 !important;
+}
+.jaune.titre {
+  font-size: clamp(20px, 6.5vw, 48px) !important;
+}
+
+/* Make article cards adapt better on narrow Android screens */
+@media (max-width: 768px) {
+  #actualite .element1,
+  #actualite .element2,
+  #actualite .element3 {
+    margin: 12px !important;
+    width: calc(100% - 24px) !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+    font-size: 0.95rem !important;
+  }
+
+  .agenda > div { width: 100% !important; }
+
+  /* Make slider responsive instead of fixed pixel sizes */
+  .slider {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  .slides, .slide { height: auto !important; }
+}
+
+/* Slight extra tweak for very small screens */
+@media (max-width: 480px) {
+  .titlebackground h2, .jaune.titre { font-size: clamp(18px, 8vw, 36px) !important; }
+}
+
+
 /* Titres des actualités sur la page actualite : fond vert et texte blanc */
 .actualite .article-title {
   background: #36a745 !important;
@@ -1553,4 +1602,58 @@ img {
     display: block !important;
     white-space: normal !important;
   }
+}
+
+/* ===== Normalize mobile rendering when html.is-mobile is present ===== */
+/* These rules target mobile devices uniformly (applied when JS sets html.is-mobile) */
+html.is-mobile, html.is-mobile body {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Headlines slightly smaller on mobile across platforms */
+html.is-mobile .titlebackground h2,
+html.is-mobile .jaune.titre {
+  font-size: clamp(18px, 6.5vw, 36px) !important;
+  line-height: 1.08 !important;
+}
+
+/* Ensure article cards (actualités) are consistent */
+html.is-mobile #actualite .element1,
+html.is-mobile #actualite .element2,
+html.is-mobile #actualite .element3,
+html.is-mobile .agenda > div {
+  margin: 10px !important;
+  width: calc(100% - 20px) !important;
+  padding: 10px !important;
+  box-sizing: border-box !important;
+  font-size: 0.96rem !important;
+}
+
+/* Force slider to adapt height on mobile */
+html.is-mobile .slider {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Reduce excessive paddings that can differ between UAs */
+html.is-mobile header,
+html.is-mobile .footer-haut,
+html.is-mobile .footer-bas {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+
+/* Prevent iOS from styling telephone numbers as blue links */
+a[href^="tel:"],
+.contact p {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* If a browser auto-detects phone numbers into links, make sure they inherit color */
+meta[name="format-detection"] ~ * a[href^="tel:"] {
+  color: inherit !important;
+  text-decoration: none !important;
 }

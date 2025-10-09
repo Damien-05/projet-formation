@@ -2,7 +2,16 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      // Add a helper class when the viewport is a mobile width so CSS can normalize mobile rendering
+      (function(){
+        try{
+          if (window.innerWidth && window.innerWidth <= 768) document.documentElement.classList.add('is-mobile');
+        }catch(e){ /* ignore */ }
+      })();
+    </script>
     <link rel="stylesheet" href="../css/style.css">
     <title>AgenceEco</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
