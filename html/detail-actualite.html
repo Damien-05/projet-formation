@@ -35,7 +35,7 @@
 	<main class="detail-actualite-container">
 		<h2 style="position:absolute;left:-9999px;">Détail actualité</h2>
 		<div id="detail-actualite" class="news-card">
-			<!-- Les infos détaillées seront injectées ici -->
+			<!-- Les informations détaillées seront injectées ici -->
 		</div>
 		<a href="actualite.html" class="btn" style="margin:2em auto;display:block;width:max-content;">Retour aux actualités</a>
 	</main>
@@ -91,11 +91,12 @@
 	<script src="../js/api.js"></script>
 	<script src="../js/menu.js"></script>
 	<script>
-		// Récupère l'id de l'actualité depuis l'URL
+		// Récupère l'ID de l'actualité depuis l'URL
 		function getIdFromUrl() {
 			const params = new URLSearchParams(window.location.search);
 			return params.get('id');
 		}
+		// Récupère les détails d'une actualité via l'API
 		async function fetchDetailActualite(id) {
 			try {
 				return await window.API.getArticle(id);
@@ -103,6 +104,7 @@
 				return null;
 			}
 		}
+		// Affiche les détails dans le conteneur prévu
 		async function afficherDetail() {
 			const id = getIdFromUrl();
 			const container = document.getElementById('detail-actualite');
