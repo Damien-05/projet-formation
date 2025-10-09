@@ -1509,8 +1509,8 @@ img {
   box-shadow: none;
 }
 
-/* ----- Cross-browser mobile fixes ----- */
-/* Improve consistency between iOS and Android rendering */
+/* ----- Correctifs mobiles cross-browser ----- */
+/* Améliore la cohérence entre les rendus iOS et Android */
 html {
   box-sizing: border-box;
   -webkit-text-size-adjust: 100%; /* prevent font autosizing on mobile browsers */

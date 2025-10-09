@@ -1,5 +1,5 @@
 // slider.js
-// Gère le slider/carrousel d'images
+// Gère le slider / carrousel d'images
 
 document.addEventListener("DOMContentLoaded", () => {
   const slidesEl = document.querySelector(".slides");

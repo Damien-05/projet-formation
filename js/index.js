@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // --- Slider ---
+  // --- Slider (carrousel) ---
   const slidesEl = document.querySelector(".slides");
   const dots = document.querySelectorAll(".dot");
   const prevBtn = document.querySelector(".prev");
